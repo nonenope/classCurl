@@ -41,6 +41,7 @@ class Curl
     public function setUrl()
     {
         $this->setOpt(CURLOPT_URL, $this->url);
+        $this->setDefaultOptions();
     }
 
     public function get($url = null)
@@ -59,7 +60,18 @@ class Curl
         $this->error = $this->curlErrorCode || $this->curlErrorMessage;
     }
 
-
-
-    
+    public function setDefaultOptions()
+    {
+        $opts = [
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERAGENT      => "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00",
+            CURLOPT_REFERER        => "http://example.com/aboutme.html"
+        ];
+        
+        foreach($opts as $key => $val)
+        {
+            $this->setOpt($key, $val);
+        }
+    }
 }
