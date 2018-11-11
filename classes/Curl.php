@@ -12,6 +12,9 @@ class Curl
     public $curlErrorCode = 0;
     public $curlErrorMessage = null;
 
+    public $error = false;
+    public $errorMessage; 
+
     public function __construct()
     {
         if (!extension_loaded('curl')) {
@@ -35,13 +38,15 @@ class Curl
         $seconds = ($time) ? $time : DEFAULT_TIMEOUT;
         $this->setOpt(CURLOPT_TIMEOUT, $seconds);
     }
-
-    public function get($url)
+    public function setUrl()
     {
-        if (is_array($url)) {
-            $data = $url;
-            $url  = (string)$this->url;
-        }
+        $this->setOpt(CURLOPT_URL, $this->url);
+    }
+
+    public function get($url = null)
+    {
+        $this->url = $url;
+        $this->setUrl();
         return $this->exec();
     }
 
@@ -50,7 +55,11 @@ class Curl
         $this->curlResponse     = curl_exec($this->curl);
         $this->curlErrorCode    = curl_errno($this->curl);
         $this->curlErrorMessage = curl_error($this->curl);
+
+        $this->error = $this->curlErrorCode || $this->curlErrorMessage;
     }
+
+
 
     
 }
