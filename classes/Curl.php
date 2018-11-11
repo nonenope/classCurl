@@ -65,8 +65,7 @@ class Curl
         $opts = [
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERAGENT      => "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00",
-            CURLOPT_REFERER        => "http://example.com/aboutme.html"
+            CURLOPT_USERAGENT      => "Chrome: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2",
         ];
         
         foreach($opts as $key => $val)
